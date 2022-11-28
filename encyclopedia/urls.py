@@ -9,5 +9,6 @@ urlpatterns = [
     path("new_page/",views.new_page,name="new_page"),
     path("new_page/create_new_page/",views.create_new_page,name="create_new_page"), 
     path("edit/",views.edit,name="edit"),
-    path("save_edit/",views.save_edit,name="save_edit")
+    path("save_edit/",views.save_edit,name="save_edit"),
+    path("random_page/",views.random_page,name="random_page")
 ]

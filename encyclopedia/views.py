@@ -56,6 +56,10 @@ def new_page(request):
     return render(request,"encyclopedia/new_page.html")
 
 def create_new_page(request):
+    """
+    creates new page
+    """
+    
     titles=[title.upper() for title in util.list_entries()]
     if request.method=="POST":
         title=request.POST["title"].upper()
@@ -66,8 +70,25 @@ def create_new_page(request):
                 "entries": util.list_entries()
             })
         return render(request,"encyclopedia/error.html",{
-        "title":"Error",
+        "title":"Error", 
         "Body":"<h1>Page already exists</h1>"
         })
     return render(request,"encyclopedia/index.html")
 
+def edit(request):
+    if request.method=="POST":
+        title=request.POST["entry_title"]
+        body=util.get_entry(title)
+        return render(request,"encyclopedia/edit_page.html",{
+            "title":title,
+            "body":body
+        })
+
+def save_edit(request):
+    if request.method=="POST":
+        title=request.POST["title"]
+        body=request.POST["body"]
+        util.save_entry(title,body)
+        return render(request, "encyclopedia/index.html", {
+        "entries": util.list_entries()
+    })

@@ -5,7 +5,12 @@
 {% endblock%}
 
 {% block body %}
-<a > edit page</a>
+
 {{entry|safe}}
+<form action="{% url 'edit'%}" method="post">
+    {%csrf_token%}
+    <input type="hidden" name="entry_title" value="{{title}}">
+    <input type="submit" value="edit" class="btn btn-dan" onclick="submit">
+</form>
 
 {% endblock %}
